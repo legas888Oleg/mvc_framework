@@ -6,6 +6,6 @@ use application\core\Controller;
 
 class MainController extends Controller {
     public function indexAction() {
-        echo 'Index page';
+        $this->view->render('Главная страница');
     }
 }
