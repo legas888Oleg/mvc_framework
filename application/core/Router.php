@@ -31,14 +31,20 @@ class Router {
 
     public function run(){
         if($this->match()){
-            $controller = 'application\controllers\\'.ucfirst($this->params['controller']).'Controller.php';
-            if (class_exists($controller)){
-                echo 'OK';
+            $path = 'application\controllers\\'.ucfirst($this->params['controller']).'Controller';
+            if (class_exists($path)){
+                $action = $this->params['action'].'Action';
+                if (method_exists($path, $action)){
+                    $controller = new $path($this->params);
+                    $controller->$action();
+                } else {
+                    echo 'Action ' . $action . ' is not found';
+                }
             } else {
-                echo 'Не найден: ' . $controller;
+                echo 'Controller ' . $path . ' is not found';
             }
         } else {
-            echo 'Маршрут не найден';
+            echo 'Router is not found';
         }
     }
 }
