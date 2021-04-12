@@ -6,6 +6,9 @@ use application\core\Controller;
 
 class AccountController extends Controller {
     public function loginAction() {
+        if (!empty($_POST)){
+//            $this->view->message('success', '123');
+        }
         $this->view->render('Страница входа');
     }
 
